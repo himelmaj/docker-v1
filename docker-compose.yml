@@ -1,0 +1,30 @@
+services:
+  db:
+    container_name: db_mysql
+    build:
+      context: ./db
+      dockerfile: mysql.dockerfile 
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+
+  web:
+    container_name: web
+    build:
+      context: ./web
+      dockerfile: next.dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://root:root@localhost:3306/web-db
+    depends_on:
+      - db
+
+volumes:
+  db_mysql: {}
