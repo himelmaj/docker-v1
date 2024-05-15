@@ -10,6 +10,8 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 RUN npm install
 
+RUN npx prisma generate
+
 FROM base AS builder
 
 WORKDIR /app

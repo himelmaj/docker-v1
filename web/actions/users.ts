@@ -1,6 +1,5 @@
 "use server";
 import prisma from "@/lib/db";
-import { users } from "@prisma/client";
 
 export const getUsers = async () => {
   try {
@@ -11,7 +10,7 @@ export const getUsers = async () => {
   }
 };
 
-export const getUser = async (id: users["id"]) => {
+export const getUser = async (id: number) => {
   try {
     const user = await prisma.users.findUnique({
       where: {
@@ -24,7 +23,7 @@ export const getUser = async (id: users["id"]) => {
   }
 };
 
-export const createUser = async (data: users) => {
+export const createUser = async (data: any) => {
   try {
     const user = await prisma.users.create({
       data,

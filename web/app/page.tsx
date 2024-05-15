@@ -10,20 +10,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { HoverEffect } from "@/components/ui/card-hover-effect";
+
 const page = async () => {
   const users = await getUsers();
   return (
     <section className="">
-      <ul className="grid grid-cols-4 gap-4">
-        {users.map((user) => (
-          <Card key={user.id}>
-            <CardHeader>
-              <CardTitle>{user.name}</CardTitle>
-              <CardDescription>{user.username}</CardDescription>
-            </CardHeader>
-          </Card>
-        ))}
-      </ul>
+      <HoverEffect items={users} />
     </section>
   );
 };
